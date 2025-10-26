@@ -10,19 +10,21 @@
             --primary-dark: #5649c0;
             --secondary: #a29bfe;
             --accent: #fd79a8;
+            --success: #00b894;
+            --danger: #d63031;
             --dark: #2d3436;
             --gray-dark: #636e72;
             --gray: #b2bec3;
             --gray-light: #dfe6e9;
             --white: #ffffff;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             background: linear-gradient(135deg, var(--gray-light) 0%, var(--white) 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -34,13 +36,13 @@
             color: var(--dark);
             line-height: 1.6;
         }
-        
+
         .container {
             max-width: 800px;
             width: 100%;
             margin: 0 auto;
         }
-        
+
         header {
             text-align: center;
             margin-bottom: 30px;
@@ -50,19 +52,19 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             width: 100%;
         }
-        
+
         h1 {
             color: var(--primary);
             margin-bottom: 10px;
             font-size: 2.2rem;
         }
-        
+
         .subtitle {
             color: var(--gray-dark);
             font-size: 1.1rem;
             margin-bottom: 15px;
         }
-        
+
         .info-box {
             background: var(--secondary);
             color: var(--white);
@@ -72,14 +74,23 @@
             margin-top: 15px;
             display: inline-block;
         }
-        
+
+        .threshold-info {
+            background: var(--gray-light);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--primary);
+        }
+
         .form-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .form-section {
             flex: 1;
             min-width: 300px;
@@ -88,25 +99,25 @@
             border-radius: 16px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
-        
+
         .form-section h3 {
             color: var(--primary);
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--gray-light);
         }
-        
+
         .form-group {
             margin-bottom: 18px;
         }
-        
+
         label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
             color: var(--dark);
         }
-        
+
         input, select {
             width: 100%;
             padding: 12px 15px;
@@ -115,13 +126,13 @@
             font-size: 1rem;
             transition: all 0.3s ease;
         }
-        
+
         input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
         }
-        
+
         button {
             margin-top: 10px;
             width: 100%;
@@ -136,17 +147,17 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(108, 92, 231, 0.3);
         }
-        
+
         button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(108, 92, 231, 0.4);
         }
-        
+
         button:active {
             transform: translateY(0);
         }
-        
+
         #result {
             background: var(--white);
             padding: 25px;
@@ -158,13 +169,13 @@
             transition: all 0.3s ease;
             border-left: 5px solid var(--primary);
         }
-        
+
         .result-title {
             color: var(--primary);
             margin-bottom: 15px;
             font-size: 1.5rem;
         }
-        
+
         .prediction {
             font-size: 1.8rem;
             font-weight: bold;
@@ -172,23 +183,61 @@
             padding: 10px;
             border-radius: 10px;
         }
-        
+
         .survived {
-            background-color: rgba(108, 92, 231, 0.1);
-            color: var(--primary);
+            background-color: rgba(0, 184, 148, 0.1);
+            color: var(--success);
+            border: 2px solid var(--success);
         }
-        
+
         .not-survived {
-            background-color: rgba(253, 121, 168, 0.1);
-            color: var(--accent);
+            background-color: rgba(214, 48, 49, 0.1);
+            color: var(--danger);
+            border: 2px solid var(--danger);
         }
-        
+
         .probability {
             font-size: 1.2rem;
             margin: 10px 0;
             color: var(--gray-dark);
         }
-        
+
+        .threshold-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .threshold-bar {
+            height: 8px;
+            flex-grow: 1;
+            background: var(--gray-light);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .threshold-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: all 0.5s ease;
+        }
+
+        .threshold-marker {
+            position: absolute;
+            top: -5px;
+            width: 2px;
+            height: 18px;
+            background: var(--dark);
+        }
+
+        .threshold-label {
+            margin: 0 10px;
+            font-size: 0.9rem;
+            color: var(--gray-dark);
+        }
+
         .message {
             margin-top: 15px;
             padding: 12px;
@@ -196,13 +245,13 @@
             border-radius: 8px;
             font-style: italic;
         }
-        
+
         .loading {
             display: none;
             text-align: center;
             margin: 20px 0;
         }
-        
+
         .spinner {
             border: 4px solid var(--gray);
             border-top: 4px solid var(--primary);
@@ -212,12 +261,12 @@
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         .error {
             background-color: rgba(253, 121, 168, 0.1);
             color: var(--accent);
@@ -225,12 +274,12 @@
             border-radius: 10px;
             margin-top: 15px;
         }
-        
+
         @media (max-width: 768px) {
             .form-container {
                 flex-direction: column;
             }
-            
+
             .form-section {
                 min-width: 100%;
             }
@@ -245,8 +294,11 @@
             <div class="info-box">
                 Complete la información del pasajero para predecir su supervivencia
             </div>
+            <div class="threshold-info">
+                <strong>Umbral de supervivencia:</strong> 50% o más para considerar que sobrevive
+            </div>
         </header>
-        
+
         <div class="form-container">
             <div class="form-section">
                 <h3>Información Personal</h3>
@@ -255,7 +307,7 @@
                         <label for="Name">Nombre completo:</label>
                         <input type="text" id="Name" name="Name" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Title">Título:</label>
                         <select id="Title" name="Title" required>
@@ -266,7 +318,7 @@
                             <option value="Other">Otro</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Sex">Sexo:</label>
                         <select id="Sex" name="Sex" required>
@@ -274,14 +326,14 @@
                             <option value="female">Mujer</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Age">Edad:</label>
                         <input type="number" step="any" id="Age" name="Age" required>
                     </div>
                 </form>
             </div>
-            
+
             <div class="form-section">
                 <h3>Detalles del Viaje</h3>
                 <form id="titanicForm2">
@@ -293,22 +345,22 @@
                             <option value="3">Tercera Clase</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="SibSp">Hermanos / Cónyuges a bordo:</label>
                         <input type="number" id="SibSp" name="SibSp" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Parch">Padres / Hijos a bordo:</label>
                         <input type="number" id="Parch" name="Parch" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Fare">Tarifa (Libras):</label>
                         <input type="number" step="any" id="Fare" name="Fare" required>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="Embarked">Puerto de embarque:</label>
                         <select id="Embarked" name="Embarked" required>
@@ -317,17 +369,17 @@
                             <option value="S">Southampton</option>
                         </select>
                     </div>
-                    
+
                     <button type="submit">Predecir Supervivencia</button>
                 </form>
             </div>
         </div>
-        
+
         <div class="loading" id="loading">
             <div class="spinner"></div>
             <p>Consultando al modelo de predicción...</p>
         </div>
-        
+
         <div id="result" style="display: none;">
             <!-- Resultado se mostrará aquí -->
         </div>
@@ -338,36 +390,39 @@
         const form1 = document.getElementById("titanicForm");
         const loading = document.getElementById("loading");
         const result = document.getElementById("result");
-        
+
+        // Umbral de supervivencia - 50%
+        const SURVIVAL_THRESHOLD = 0.50;
+
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            
+
             // Mostrar loading
             loading.style.display = "block";
             result.style.display = "none";
-            
+
             try {
                 // Obtener datos de ambos formularios
                 const data1 = new FormData(form1);
                 const data2 = new FormData(form);
                 const data = Object.fromEntries([...data1, ...data2]);
-                
+
                 // Hacer petición REAL al backend
                 const res = await fetch("https://web-model-predict-titanic.onrender.com/api/predict/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
                 });
-                
+
                 if (!res.ok) {
                     throw new Error(`Error ${res.status}: ${res.statusText}`);
                 }
-                
+
                 const resultData = await res.json();
-                
-                // Mostrar resultado
+
+                // Mostrar resultado con el umbral aplicado
                 displayResult(resultData);
-                
+
             } catch (error) {
                 console.error("Error:", error);
                 result.innerHTML = `
@@ -375,7 +430,7 @@
                         <h3>Error de conexión</h3>
                         <p>No se pudo conectar con el servidor de predicción.</p>
                         <p><strong>Detalles:</strong> ${error.message}</p>
-                        <p>Verifique que el servidor backend esté ejecutándose en http://127.0.0.1:8000</p>
+                        <p>Verifique que el servidor backend esté ejecutándose</p>
                     </div>
                 `;
                 result.style.display = "block";
@@ -384,21 +439,48 @@
                 result.scrollIntoView({ behavior: 'smooth' });
             }
         });
-        
+
         function displayResult(resultData) {
-            const survived = resultData.prediction === 1;
+            // Aplicar umbral del 50%
+            const probability = resultData.probability;
+            const survives = probability >= SURVIVAL_THRESHOLD;
             
+            // Determinar colores según el resultado
+            const probabilityColor = probability >= SURVIVAL_THRESHOLD ? 
+                'var(--success)' : 'var(--danger)';
+            
+            // Crear mensaje según el umbral
+            let thresholdMessage = '';
+            if (probability < SURVIVAL_THRESHOLD) {
+                thresholdMessage = `Aunque el modelo indica una probabilidad de ${(probability * 100).toFixed(2)}%, ` +
+                                  `se considera que NO SOBREVIVE por estar por debajo del umbral del ${(SURVIVAL_THRESHOLD * 100)}%.`;
+            } else {
+                thresholdMessage = `La probabilidad de ${(probability * 100).toFixed(2)}% supera el umbral del ${(SURVIVAL_THRESHOLD * 100)}%, ` +
+                                  `por lo que se considera que SOBREVIVE.`;
+            }
+
             result.innerHTML = `
                 <h3 class="result-title">Resultado para ${resultData.name}</h3>
-                <div class="prediction ${survived ? 'survived' : 'not-survived'}">
-                    ${survived ? "✅ SOBREVIVIÓ" : "❌ NO SOBREVIVIÓ"}
+                <div class="prediction ${survives ? 'survived' : 'not-survived'}">
+                    ${survives ? " SOBREVIVIÓ" : " NO SOBREVIVIÓ"}
                 </div>
                 <div class="probability">
-                    <strong>Probabilidad:</strong> ${(resultData.probability * 100).toFixed(2)}%
+                    <strong>Probabilidad del modelo:</strong> ${(probability * 100).toFixed(2)}%
                 </div>
-                <div class="message">${resultData.message}</div>
+                
+                <div class="threshold-indicator">
+                    <div class="threshold-label">0%</div>
+                    <div class="threshold-bar">
+                        <div class="threshold-fill" style="width: ${probability * 100}%; background: ${probabilityColor};"></div>
+                        <div class="threshold-marker" style="left: ${SURVIVAL_THRESHOLD * 100}%;"></div>
+                    </div>
+                    <div class="threshold-label">100%</div>
+                </div>
+                <div class="threshold-label">Umbral: ${(SURVIVAL_THRESHOLD * 100)}%</div>
+                
+                <div class="message">${thresholdMessage}</div>
             `;
-            
+
             result.style.display = "block";
         }
     </script>
