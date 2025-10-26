@@ -353,7 +353,7 @@
                 const data = Object.fromEntries([...data1, ...data2]);
                 
                 // Hacer petición REAL al backend
-                const res = await fetch("http://127.0.0.1:8000/api/predict/", {
+                const res = await fetch("https://web-model-predict-titanic.onrender.com/api/predict/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
