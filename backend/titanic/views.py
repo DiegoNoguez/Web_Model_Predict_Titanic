@@ -385,7 +385,7 @@ class DebugPredictionView(APIView):
             return Response({"error": str(e)}, status=500)
 
 
-# Verificación al cargar el módulo
+# Verificación al cargar el módulo i el funcionameinto correcto del api 
 print("=== VERIFICACIÓN ROBUSTA DE CARGA EN API ===")
 print(f" Modelo cargado: {model is not None}")
 print(f" Scaler cargado: {scaler is not None}")
